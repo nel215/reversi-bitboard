@@ -10,6 +10,12 @@ void Show(uint64_t b) {
   }
   std::cout << std::endl;
 }
+uint64_t Mirror(uint64_t b) {
+  b = ((b & 0xf0f0f0f0f0f0f0f0) >> 4) | ((b & 0x0f0f0f0f0f0f0f0f) << 4);
+  b = ((b & 0xcccccccccccccccc) >> 2) | ((b & 0x3333333333333333) << 2);
+  b = ((b & 0xaaaaaaaaaaaaaaaa) >> 1) | ((b & 0x5555555555555555) << 1);
+  return b;
+}
 uint64_t Rotate45(uint64_t b) {
   b = (b & 0xaaaaaaaaaaaaaaaa) | ((b & 0x5555555555555555) >> 8);
   b = (b & 0xcccccccccccccccc) | ((b & 0x3333333333333333) >> 16);
