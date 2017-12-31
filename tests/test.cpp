@@ -24,4 +24,11 @@ TEST_F(Test, GetCandiateRowLeft) {
   uint8_t c = GetCandiateRowLeft(b, w);
   EXPECT_EQ(1<<2, c);
 }
+
+TEST_F(Test, GetCandiateLeft) {
+  uint64_t b = 0x0101010101010101;
+  uint64_t w = 0x0202020202020202;
+  uint64_t c = GetCandiateLeft(b, w);
+  EXPECT_EQ(0x0404040404040404, c);
+}
 }  // namespace bitboard

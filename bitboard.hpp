@@ -26,6 +26,15 @@ uint8_t GetCandiateRowLeft(uint8_t b, uint8_t w) {
   uint8_t left = b << 1;
   return ~(left | w) & (left + w);
 }
+uint64_t GetCandiateLeft(uint64_t b, uint64_t w) {
+  uint64_t c = 0;
+  for (int y=0; y < 8; y++) {
+    c = (c << 8)| GetCandiateRowLeft(static_cast<uint8_t>(b), static_cast<uint8_t>(w));
+    b = b >> 8;
+    w = w >> 8;
+  }
+  return c;
+}
 class Reversi {
   int size = 8;
   uint64_t black;
