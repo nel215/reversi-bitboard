@@ -1,7 +1,20 @@
 #ifndef BITBOARD_HPP_
 #define BITBOARD_HPP_
+#include <iostream>
 
 namespace bitboard {
+void Show(uint64_t b) {
+  for (int i=63; i >= 0; i--) {
+    std::cout << ((b >> i)&1);
+  }
+  std::cout << std::endl;
+}
+uint64_t Rotate45(uint64_t b) {
+  b = (b & 0xaaaaaaaaaaaaaaaa) | ((b & 0x5555555555555555) >> 8);
+  b = (b & 0xcccccccccccccccc) | ((b & 0x3333333333333333) >> 16);
+  b = (b & 0xf0f0f0f0f0f0f0f0) | ((b & 0x0f0f0f0f0f0f0f0f) >> 32);
+  return b;
+}
 class Reversi {
   int size = 8;
   uint64_t black;
