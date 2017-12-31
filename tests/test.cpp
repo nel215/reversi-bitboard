@@ -4,5 +4,5 @@
 class Test : public ::testing::Test{};
 
 TEST_F(Test, Sample) {
-  Reversi();
+  bitboard::Reversi();
 }

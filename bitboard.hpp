@@ -1,7 +1,7 @@
 #ifndef BITBOARD_HPP_
 #define BITBOARD_HPP_
 
-
+namespace bitboard {
 class Reversi {
   int size = 8;
   uint64_t black;
@@ -23,4 +23,5 @@ class Reversi {
     SetBlack(4, 3);
   }
 };
+}  // namespace bitboard
 #endif  // BITBOARD_HPP_
