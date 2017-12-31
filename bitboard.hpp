@@ -6,6 +6,7 @@ namespace bitboard {
 void Show(uint64_t b) {
   for (int i=63; i >= 0; i--) {
     std::cout << ((b >> i)&1);
+    if (i%8 == 0) std::cout << std::endl;
   }
   std::cout << std::endl;
 }
