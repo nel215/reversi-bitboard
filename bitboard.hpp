@@ -16,6 +16,10 @@ uint64_t Rotate45(uint64_t b) {
   b = (b & 0xf0f0f0f0f0f0f0f0) | ((b & 0x0f0f0f0f0f0f0f0f) >> 32);
   return b;
 }
+uint8_t GetCandiateRowLeft(uint8_t b, uint8_t w) {
+  uint8_t left = b << 1;
+  return ~(left | w) & (left + w);
+}
 class Reversi {
   int size = 8;
   uint64_t black;
