@@ -8,6 +8,12 @@ TEST_F(Test, Sample) {
   Reversi();
 }
 
+TEST_F(Test, Diag) {
+  uint64_t b = 0xf00f00000000f00f;
+  uint64_t res = Diag(b);
+  EXPECT_EQ(0x8282828241414141, res);
+}
+
 TEST_F(Test, Rotate45) {
   uint64_t b = -1;
   std::tuple<uint64_t, uint64_t> res = Rotate45(b);

@@ -11,6 +11,15 @@ void Show(uint64_t b) {
   }
   std::cout << std::endl;
 }
+uint64_t Diag(uint64_t b) {
+  uint64_t t = 0x0f0f0f0f00000000 & (b ^ (b << 28));
+  b = b ^ (t ^ (t >> 28));
+  t = 0x3333000033330000 & (b ^ (b << 14));
+  b = b ^ (t ^ (t >> 14));
+  t = 0x5500550055005500 & (b ^ (b << 7));
+  b = b ^ (t ^ (t >> 7));
+  return b;
+}
 uint64_t Mirror(uint64_t b) {
   b = ((b & 0xf0f0f0f0f0f0f0f0) >> 4) | ((b & 0x0f0f0f0f0f0f0f0f) << 4);
   b = ((b & 0xcccccccccccccccc) >> 2) | ((b & 0x3333333333333333) << 2);
