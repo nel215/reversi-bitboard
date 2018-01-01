@@ -96,6 +96,12 @@ uint64_t GetCandidatesHalf(uint64_t b, uint64_t w) {
 
   return c;
 }
+uint64_t GetCandidates(uint64_t b, uint64_t w) {
+  uint64_t c = 0;
+  c = c | GetCandidatesHalf(b, w);
+  c = c | Mirror(FlipVertical(GetCandidatesHalf(Mirror(FlipVertical(b)), Mirror(FlipVertical(w)))));
+  return c;
+}
 class Reversi {
   int size = 8;
   uint64_t black;

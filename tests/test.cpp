@@ -63,4 +63,11 @@ TEST_F(Test, GetCandidatesHalf) {
   EXPECT_EQ(0x0000001000150000, c);
 }
 
+TEST_F(Test, GetCandidates) {
+  uint64_t b = 0x0000000400000000;
+  uint64_t w = 0x00000e0a0e000000;
+  uint64_t c = GetCandidates(b, w);
+  EXPECT_EQ(0x0015001100150000, c);
+}
+
 }  // namespace bitboard
