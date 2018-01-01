@@ -4,9 +4,6 @@
 class Test : public ::testing::Test{};
 
 namespace bitboard {
-TEST_F(Test, Sample) {
-  Reversi();
-}
 
 TEST_F(Test, Diag) {
   uint64_t b = 0xf00f00000000f00f;
