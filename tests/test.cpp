@@ -36,6 +36,13 @@ TEST_F(Test, GetCandidatesRight) {
   EXPECT_EQ(0x0004040404040400, c);
 }
 
+TEST_F(Test, GetCandidatesUpperRight) {
+  uint64_t b = 0x0000000400000000;
+  uint64_t w = 0x00000e0a0e000000;
+  uint64_t c = GetCandidatesUpperRight(b, w);
+  EXPECT_EQ(0x0000000000100000, c);
+}
+
 TEST_F(Test, GetCandidatesRightAndUpperRight) {
   uint64_t b = 0x0000000400000000;
   uint64_t w = 0x00000e0a0e000000;

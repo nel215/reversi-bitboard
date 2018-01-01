@@ -55,17 +55,20 @@ uint64_t GetCandidatesRight(uint64_t b, uint64_t w) {
   }
   return c;
 }
-uint64_t GetCandidatesRightAndUpperRight(uint64_t b, uint64_t w) {
-  uint64_t c = 0;
-  c = c | GetCandidatesRight(b, w);
+uint64_t GetCandidatesUpperRight(uint64_t b, uint64_t w) {
   auto rotB = Rotate45(b);
   auto rotW = Rotate45(w);
-  c = c | Rotate45Reverse(
+  return Rotate45Reverse(
     std::tuple<uint64_t, uint64_t>(
       GetCandidatesRight(std::get<0>(rotB), std::get<0>(rotW)),
       GetCandidatesRight(std::get<1>(rotB), std::get<1>(rotW))
     )
   );
+}
+uint64_t GetCandidatesRightAndUpperRight(uint64_t b, uint64_t w) {
+  uint64_t c = 0;
+  c = c | GetCandidatesRight(b, w);
+  c = c | GetCandidatesUpperRight(b, w);
   return c;
 }
 class Reversi {
