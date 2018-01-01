@@ -41,29 +41,29 @@ uint64_t Rotate45Reverse(std::tuple<uint64_t, uint64_t> rot) {
   rhs = ((rhs & 0x5555555555555555) << 8)  | (rhs & 0xaaaaaaaaaaaaaaaa);
   return lhs ^ rhs;
 }
-uint8_t GetCandidateRowLeft(uint8_t b, uint8_t w) {
+uint8_t GetCandidatesRowRight(uint8_t b, uint8_t w) {
   uint8_t left = b << 1;
   return ~(left | w) & (left + w);
 }
-uint64_t GetCandidateLeft(uint64_t b, uint64_t w) {
+uint64_t GetCandidatesRight(uint64_t b, uint64_t w) {
   uint64_t c = 0;
   for (int y=0; y < 8; y++) {
-    uint64_t res = GetCandidateRowLeft(static_cast<uint8_t>(b), static_cast<uint8_t>(w));
+    uint64_t res = GetCandidatesRowRight(static_cast<uint8_t>(b), static_cast<uint8_t>(w));
     c = c | (res << (y*8));
     b = b >> 8;
     w = w >> 8;
   }
   return c;
 }
-uint64_t GetCandidateHorizontal(uint64_t b, uint64_t w) {
+uint64_t GetCandidatesRightAndUpperRight(uint64_t b, uint64_t w) {
   uint64_t c = 0;
-  c = c | GetCandidateLeft(b, w);
+  c = c | GetCandidatesRight(b, w);
   auto rotB = Rotate45(b);
   auto rotW = Rotate45(w);
   c = c | Rotate45Reverse(
     std::tuple<uint64_t, uint64_t>(
-      GetCandidateLeft(std::get<0>(rotB), std::get<0>(rotW)),
-      GetCandidateLeft(std::get<1>(rotB), std::get<1>(rotW))
+      GetCandidatesRight(std::get<0>(rotB), std::get<0>(rotW)),
+      GetCandidatesRight(std::get<1>(rotB), std::get<1>(rotW))
     )
   );
   return c;

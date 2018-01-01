@@ -22,24 +22,24 @@ TEST_F(Test, Mirror) {
   EXPECT_EQ(0xff7f3f1f0f070301, Mirror(b));
 }
 
-TEST_F(Test, GetCandidateRowLeft) {
+TEST_F(Test, GetCandidatesRowRight) {
   uint8_t b = 1<<0;
   uint8_t w = 1<<1;
-  uint8_t c = GetCandidateRowLeft(b, w);
+  uint8_t c = GetCandidatesRowRight(b, w);
   EXPECT_EQ(1<<2, c);
 }
 
-TEST_F(Test, GetCandidateLeft) {
+TEST_F(Test, GetCandidatesRight) {
   uint64_t b = 0x0001010101010101;
   uint64_t w = 0x0202020202020200;
-  uint64_t c = GetCandidateLeft(b, w);
+  uint64_t c = GetCandidatesRight(b, w);
   EXPECT_EQ(0x0004040404040400, c);
 }
 
-TEST_F(Test, GetCandidateHorizontal) {
+TEST_F(Test, GetCandidatesRightAndUpperRight) {
   uint64_t b = 0x0000000400000000;
   uint64_t w = 0x00000e0a0e000000;
-  uint64_t c = GetCandidateHorizontal(b, w);
+  uint64_t c = GetCandidatesRightAndUpperRight(b, w);
   EXPECT_EQ(0x0000001000100000, c);
 }
 
