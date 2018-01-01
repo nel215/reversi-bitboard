@@ -48,7 +48,8 @@ uint8_t GetCandidateRowLeft(uint8_t b, uint8_t w) {
 uint64_t GetCandidateLeft(uint64_t b, uint64_t w) {
   uint64_t c = 0;
   for (int y=0; y < 8; y++) {
-    c = (c << 8)| GetCandidateRowLeft(static_cast<uint8_t>(b), static_cast<uint8_t>(w));
+    uint64_t res = GetCandidateRowLeft(static_cast<uint8_t>(b), static_cast<uint8_t>(w));
+    c = c | (res << (y*8));
     b = b >> 8;
     w = w >> 8;
   }

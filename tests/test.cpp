@@ -30,10 +30,10 @@ TEST_F(Test, GetCandidateRowLeft) {
 }
 
 TEST_F(Test, GetCandidateLeft) {
-  uint64_t b = 0x0101010101010101;
-  uint64_t w = 0x0202020202020202;
+  uint64_t b = 0x0001010101010101;
+  uint64_t w = 0x0202020202020200;
   uint64_t c = GetCandidateLeft(b, w);
-  EXPECT_EQ(0x0404040404040404, c);
+  EXPECT_EQ(0x0004040404040400, c);
 }
 
 TEST_F(Test, GetCandidateHorizontal) {
