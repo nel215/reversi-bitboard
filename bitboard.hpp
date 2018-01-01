@@ -58,7 +58,14 @@ uint64_t GetCandidateLeft(uint64_t b, uint64_t w) {
 uint64_t GetCandidateHorizontal(uint64_t b, uint64_t w) {
   uint64_t c = 0;
   c = c | GetCandidateLeft(b, w);
-  c = c | Mirror(GetCandidateLeft(Mirror(b), Mirror(w)));
+  auto rotB = Rotate45(b);
+  auto rotW = Rotate45(w);
+  c = c | Rotate45Reverse(
+    std::tuple<uint64_t, uint64_t>(
+      GetCandidateLeft(std::get<0>(rotB), std::get<0>(rotW)),
+      GetCandidateLeft(std::get<1>(rotB), std::get<1>(rotW))
+    )
+  );
   return c;
 }
 class Reversi {
