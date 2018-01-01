@@ -13,6 +13,8 @@ TEST_F(Test, Rotate45) {
   std::tuple<uint64_t, uint64_t> res = Rotate45(b);
   EXPECT_EQ(0xff7f3f1f0f070301, std::get<0>(res));
   EXPECT_EQ(0x80c0e0f0f8fcfe00, std::get<1>(res));
+  uint64_t rev = Rotate45Reverse(res);
+  EXPECT_EQ(0xffffffffffffffff, rev);
 }
 
 TEST_F(Test, Mirror) {

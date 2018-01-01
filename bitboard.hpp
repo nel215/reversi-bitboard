@@ -29,6 +29,18 @@ std::tuple<uint64_t, uint64_t> Rotate45(uint64_t b) {
   rhs = ((rhs & 0x5555555555555555) >> 8)  | (rhs & 0xaaaaaaaaaaaaaaaa);
   return std::tuple<uint64_t, uint64_t>(lhs, rhs);
 }
+uint64_t Rotate45Reverse(std::tuple<uint64_t, uint64_t> rot) {
+  uint64_t lhs = std::get<0>(rot);
+  lhs = ((lhs & 0xf0f0f0f0f0f0f0f0) >> 32) | (lhs & 0x0f0f0f0f0f0f0f0f);
+  lhs = ((lhs & 0xcccccccccccccccc) >> 16) | (lhs & 0x3333333333333333);
+  lhs = ((lhs & 0xaaaaaaaaaaaaaaaa) >> 8) | (lhs & 0x5555555555555555);
+
+  uint64_t rhs = std::get<1>(rot);
+  rhs = ((rhs & 0x0f0f0f0f0f0f0f0f) << 32) | (rhs & 0xf0f0f0f0f0f0f0f0);
+  rhs = ((rhs & 0x3333333333333333) << 16) | (rhs & 0xcccccccccccccccc);
+  rhs = ((rhs & 0x5555555555555555) << 8)  | (rhs & 0xaaaaaaaaaaaaaaaa);
+  return lhs ^ rhs;
+}
 uint8_t GetCandidateRowLeft(uint8_t b, uint8_t w) {
   uint8_t left = b << 1;
   return ~(left | w) & (left + w);
