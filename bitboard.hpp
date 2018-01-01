@@ -1,6 +1,7 @@
 #ifndef BITBOARD_HPP_
 #define BITBOARD_HPP_
 #include <iostream>
+#include <tuple>
 
 namespace bitboard {
 void Show(uint64_t b) {
@@ -16,11 +17,17 @@ uint64_t Mirror(uint64_t b) {
   b = ((b & 0xaaaaaaaaaaaaaaaa) >> 1) | ((b & 0x5555555555555555) << 1);
   return b;
 }
-uint64_t Rotate45(uint64_t b) {
-  b = (b & 0xaaaaaaaaaaaaaaaa) | ((b & 0x5555555555555555) >> 8);
-  b = (b & 0xcccccccccccccccc) | ((b & 0x3333333333333333) >> 16);
-  b = (b & 0xf0f0f0f0f0f0f0f0) | ((b & 0x0f0f0f0f0f0f0f0f) >> 32);
-  return b;
+std::tuple<uint64_t, uint64_t> Rotate45(uint64_t b) {
+  uint64_t lhs = b & 0xfffefcf8f0e0c080;
+  lhs = (lhs & 0xaaaaaaaaaaaaaaaa) | ((lhs & 0x5555555555555555) >> 8);
+  lhs = (lhs & 0xcccccccccccccccc) | ((lhs & 0x3333333333333333) >> 16);
+  lhs = (lhs & 0xf0f0f0f0f0f0f0f0) | ((lhs & 0x0f0f0f0f0f0f0f0f) >> 32);
+
+  uint64_t rhs = b & 0x000103070f1f3f7f;
+  rhs = ((rhs & 0xf0f0f0f0f0f0f0f0) << 32) | (rhs & 0x0f0f0f0f0f0f0f0f);
+  rhs = ((rhs & 0xcccccccccccccccc) << 16) | (rhs & 0x3333333333333333);
+  rhs = ((rhs & 0xaaaaaaaaaaaaaaaa) << 8) | (rhs & 0x5555555555555555);
+  return std::tuple<uint64_t, uint64_t>(lhs, rhs);
 }
 uint8_t GetCandidateRowLeft(uint8_t b, uint8_t w) {
   uint8_t left = b << 1;

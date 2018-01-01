@@ -9,8 +9,10 @@ TEST_F(Test, Sample) {
 }
 
 TEST_F(Test, Rotate45) {
-  uint64_t b = 0xfffefcf8f0e0c080;
-  EXPECT_EQ(0x80c0e0f0f8fcfeff, Rotate45(b));
+  uint64_t b = -1;
+  std::tuple<uint64_t, uint64_t> res = Rotate45(b);
+  EXPECT_EQ(0x80c0e0f0f8fcfeff, std::get<0>(res));
+  EXPECT_EQ(0x007f3f1f0f070301, std::get<1>(res));
 }
 
 TEST_F(Test, Mirror) {
