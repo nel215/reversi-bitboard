@@ -12,6 +12,7 @@ TEST_F(Test, Diag) {
   uint64_t b = 0xf00f00000000f00f;
   uint64_t res = Diag(b);
   EXPECT_EQ(0x8282828241414141, res);
+  EXPECT_EQ(b, Diag(res));
 }
 
 TEST_F(Test, Rotate45) {
