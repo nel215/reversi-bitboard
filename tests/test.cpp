@@ -18,17 +18,17 @@ TEST_F(Test, Mirror) {
   EXPECT_EQ(0xff7f3f1f0f070301, Mirror(b));
 }
 
-TEST_F(Test, GetCandiateRowLeft) {
+TEST_F(Test, GetCandidateRowLeft) {
   uint8_t b = 1<<0;
   uint8_t w = 1<<1;
-  uint8_t c = GetCandiateRowLeft(b, w);
+  uint8_t c = GetCandidateRowLeft(b, w);
   EXPECT_EQ(1<<2, c);
 }
 
-TEST_F(Test, GetCandiateLeft) {
+TEST_F(Test, GetCandidateLeft) {
   uint64_t b = 0x0101010101010101;
   uint64_t w = 0x0202020202020202;
-  uint64_t c = GetCandiateLeft(b, w);
+  uint64_t c = GetCandidateLeft(b, w);
   EXPECT_EQ(0x0404040404040404, c);
 }
 }  // namespace bitboard
