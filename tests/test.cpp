@@ -29,6 +29,12 @@ TEST_F(Test, Mirror) {
   EXPECT_EQ(0xff7f3f1f0f070301, Mirror(b));
 }
 
+TEST_F(Test, FlipVertical) {
+  uint64_t b = 0x8040201008040201;
+  uint64_t res = FlipVertical(b);
+  EXPECT_EQ(0x0102040810204080, res);
+}
+
 TEST_F(Test, GetCandidatesRowRight) {
   uint8_t b = 0x04;
   uint8_t w = 0x0a;

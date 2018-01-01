@@ -26,6 +26,12 @@ uint64_t Mirror(uint64_t b) {
   b = ((b & 0xaaaaaaaaaaaaaaaa) >> 1) | ((b & 0x5555555555555555) << 1);
   return b;
 }
+uint64_t FlipVertical(uint64_t b) {
+  b = ((b & 0x00000000ffffffff) << 32) | ((b >> 32) & 0x00000000ffffffff);
+  b = ((b & 0x0000ffff0000ffff) << 16) | ((b >> 16) & 0x0000ffff0000ffff);
+  b = ((b & 0x00ff00ff00ff00ff) << 8) | ((b >> 8) & 0x00ff00ff00ff00ff);
+  return b;
+}
 std::tuple<uint64_t, uint64_t> Rotate45(uint64_t b) {
   uint64_t lhs = b & 0x0103070f1f3f7fff;
   lhs = ((lhs & 0xf0f0f0f0f0f0f0f0) << 32) | (lhs & 0x0f0f0f0f0f0f0f0f);
