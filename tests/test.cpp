@@ -31,4 +31,12 @@ TEST_F(Test, GetCandidateLeft) {
   uint64_t c = GetCandidateLeft(b, w);
   EXPECT_EQ(0x0404040404040404, c);
 }
+
+TEST_F(Test, GetCandidateHorizontal) {
+  uint64_t b = 0x0404040404040404;
+  uint64_t w = 0x0a0a0a0a0a0a0a0a;
+  uint64_t c = GetCandidateHorizontal(b, w);
+  EXPECT_EQ(0x1111111111111111, c);
+}
+
 }  // namespace bitboard

@@ -35,6 +35,12 @@ uint64_t GetCandidateLeft(uint64_t b, uint64_t w) {
   }
   return c;
 }
+uint64_t GetCandidateHorizontal(uint64_t b, uint64_t w) {
+  uint64_t c = 0;
+  c = c | GetCandidateLeft(b, w);
+  c = c | Mirror(GetCandidateLeft(Mirror(b), Mirror(w)));
+  return c;
+}
 class Reversi {
   int size = 8;
   uint64_t black;
