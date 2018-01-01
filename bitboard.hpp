@@ -5,9 +5,9 @@
 
 namespace bitboard {
 void Show(uint64_t b) {
-  for (int i=63; i >= 0; i--) {
+  for (int i=0; i < 64; i++) {
     std::cout << ((b >> i)&1);
-    if (i%8 == 0) std::cout << std::endl;
+    if (i%8 == 7) std::cout << std::endl;
   }
   std::cout << std::endl;
 }
@@ -18,15 +18,15 @@ uint64_t Mirror(uint64_t b) {
   return b;
 }
 std::tuple<uint64_t, uint64_t> Rotate45(uint64_t b) {
-  uint64_t lhs = b & 0xfffefcf8f0e0c080;
-  lhs = (lhs & 0xaaaaaaaaaaaaaaaa) | ((lhs & 0x5555555555555555) >> 8);
-  lhs = (lhs & 0xcccccccccccccccc) | ((lhs & 0x3333333333333333) >> 16);
-  lhs = (lhs & 0xf0f0f0f0f0f0f0f0) | ((lhs & 0x0f0f0f0f0f0f0f0f) >> 32);
+  uint64_t lhs = b & 0x0103070f1f3f7fff;
+  lhs = ((lhs & 0xf0f0f0f0f0f0f0f0) << 32) | (lhs & 0x0f0f0f0f0f0f0f0f);
+  lhs = ((lhs & 0xcccccccccccccccc) << 16) | (lhs & 0x3333333333333333);
+  lhs = ((lhs & 0xaaaaaaaaaaaaaaaa) << 8)  | (lhs & 0x5555555555555555);
 
-  uint64_t rhs = b & 0x000103070f1f3f7f;
-  rhs = ((rhs & 0xf0f0f0f0f0f0f0f0) << 32) | (rhs & 0x0f0f0f0f0f0f0f0f);
-  rhs = ((rhs & 0xcccccccccccccccc) << 16) | (rhs & 0x3333333333333333);
-  rhs = ((rhs & 0xaaaaaaaaaaaaaaaa) << 8) | (rhs & 0x5555555555555555);
+  uint64_t rhs = b & 0xfefcf8f0e0c08000;
+  rhs = ((rhs & 0x0f0f0f0f0f0f0f0f) >> 32) | (rhs & 0xf0f0f0f0f0f0f0f0);
+  rhs = ((rhs & 0x3333333333333333) >> 16) | (rhs & 0xcccccccccccccccc);
+  rhs = ((rhs & 0x5555555555555555) >> 8)  | (rhs & 0xaaaaaaaaaaaaaaaa);
   return std::tuple<uint64_t, uint64_t>(lhs, rhs);
 }
 uint8_t GetCandidateRowLeft(uint8_t b, uint8_t w) {
