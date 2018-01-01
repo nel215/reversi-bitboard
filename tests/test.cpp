@@ -23,10 +23,10 @@ TEST_F(Test, Mirror) {
 }
 
 TEST_F(Test, GetCandidatesRowRight) {
-  uint8_t b = 1<<0;
-  uint8_t w = 1<<1;
+  uint8_t b = 0x04;
+  uint8_t w = 0x0a;
   uint8_t c = GetCandidatesRowRight(b, w);
-  EXPECT_EQ(1<<2, c);
+  EXPECT_EQ(0x10, c);
 }
 
 TEST_F(Test, GetCandidatesRight) {
