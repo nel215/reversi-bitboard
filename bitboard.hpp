@@ -80,15 +80,20 @@ uint64_t GetCandidatesUpperRight(uint64_t b, uint64_t w) {
     )
   );
 }
-uint64_t GetCandidatesHorizontal(uint64_t b, uint64_t w) {
+uint64_t GetCandidatesHalf(uint64_t b, uint64_t w) {
   uint64_t c = 0;
   c = c | GetCandidatesRight(b, w);
   c = c | GetCandidatesUpperRight(b, w);
 
-  auto miB = Mirror(b);
-  auto miW = Mirror(w);
-  c = c | Mirror(GetCandidatesRight(miB, miW));
-  c = c | Mirror(GetCandidatesUpperRight(miB, miW));
+  auto mdB = Mirror(Diag(b));
+  auto mdW = Mirror(Diag(w));
+  uint64_t md = 0;
+  md = md | GetCandidatesRight(mdB, mdW);
+  md = md | GetCandidatesUpperRight(mdB, mdW);
+
+  md = Diag(Mirror(md));
+  c = c | md;
+
   return c;
 }
 class Reversi {
